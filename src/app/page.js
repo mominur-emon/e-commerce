@@ -20,6 +20,24 @@ const products = [
     price: 25,
     quantity: 0,
   },
+  {
+    id: "4",
+    name: "cocola",
+    price: 65,
+    quantity: 0,
+  },
+  {
+    id: "5",
+    name: "banana",
+    price: 5,
+    quantity: 0,
+  },
+  {
+    id: "6",
+    name: "mango",
+    price: 31.36,
+    quantity: 0,
+  },
 ];
 
 export default function Home() {

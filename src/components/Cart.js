@@ -34,6 +34,7 @@ const Cart = () => {
       .then((res) => {
         console.log(res);
         if (res.url) {
+          window.location.href = res.url;
           //console.log(res.url);
         }
       });
