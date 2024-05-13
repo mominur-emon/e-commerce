@@ -20,28 +20,10 @@ const Cart = () => {
     }
   };
 
-  // const checkout = async () => {
-  //   await fetch("http://localhost:3000/api/checkout", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ products: cart }),
-  //   })
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       if (res.url) {
-  //         window.location.href = res.url;
-  //         //console.log(res.url);
-  //       }
-  //     });
-  // };
   const checkout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/checkout", {
+      // const response = await fetch("http://localhost:3000/api/checkout", {
+      const response = await fetch("api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
