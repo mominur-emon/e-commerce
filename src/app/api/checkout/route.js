@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// const stripe = require("stripe")("process.env.STRIPE_SECRET_KEY");
+
+const stripe = require("stripe")(
+  "sk_test_51PFTnZL3q9gzq9diIQluT00GzQGCezQ1cRElkM2XmWFtZaD6QwPeBORHs2woXzrBFg0lVH65gwI6FsJSozRpVoNe00S8mF5mZF"
+);
 
 const getActiveProduct = async () => {
   const checkProducts = await stripe.products.list();
@@ -40,27 +44,27 @@ export const POST = async (request) => {
   }
 
   //update product
-  // activeProducts = await getActiveProduct();
-  // let stripeItems = [];
+  activeProducts = await getActiveProduct();
+  let stripeItems = [];
 
-  // for (const product of data) {
-  //   const stripeProduct = activeProducts?.find(
-  //     (prod) => prod?.name?.toLowerCase() == product?.name?.toLowerCase()
-  //   );
-  //   if (stripeProduct) {
-  //     stripeItems.push({
-  //       price: stripeProduct?.default_price,
-  //       quantity: product?.quantity,
-  //     });
-  //   }
-  // }
+  for (const product of data) {
+    const stripeProduct = activeProducts?.find(
+      (prod) => prod?.name?.toLowerCase() == product?.name?.toLowerCase()
+    );
+    if (stripeProduct) {
+      stripeItems.push({
+        price: stripeProduct?.default_price,
+        quantity: product?.quantity,
+      });
+    }
+  }
 
-  // const session = await stripe.checkout.sessions.create({
-  //   line_items: stripeItems,
-  //   mode: "payment",
-  //   success_url: "http://localhost:3000/success",
-  //   cancel_url: "http://localhost:3000/cancel",
-  // });
+  const session = await stripe.checkout.sessions.create({
+    line_items: stripeItems,
+    mode: "payment",
+    success_url: "http://localhost:3000/success",
+    cancel_url: "http://localhost:3000/cancel",
+  });
 
   return NextResponse.json({ url: session.url });
 };
